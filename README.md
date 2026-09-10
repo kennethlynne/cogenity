@@ -92,16 +92,18 @@ Three accounts are free in total across Claude Code and Codex. Cogenity Pro is
 required when you add a fourth account.
 
 ```sh
-cogenity upgrade    # Buy Pro in the browser
-cogenity activate   # Reconnect an existing license
-cogenity billing    # Open subscription management
+cogenity upgrade             # Buy Pro in the browser
+cogenity activate <license>  # Reconnect an existing license
+cogenity billing             # Open subscription management
 ```
 
 Cogenity keeps the same Pro installation when its config remains on disk. If
 you reinstall without that config or move to another machine, run
-`cogenity activate` and enter the license key from your Creem receipt or
-customer portal. The hidden prompt does not save the license key. Do not run
-`cogenity upgrade` to recover an old purchase because it starts a new checkout.
+`cogenity activate <license>` with the license key from your Creem receipt or
+customer portal, or run `cogenity activate` alone and enter it at the hidden
+prompt. Neither path saves the license key, but the argument form leaves it in
+your shell history. Do not run `cogenity upgrade` to recover an old purchase
+because it starts a new checkout.
 
 ### What Cogenity stores
 

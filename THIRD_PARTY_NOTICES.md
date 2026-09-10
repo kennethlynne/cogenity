@@ -19,12 +19,12 @@ The release build checks the Bun metafile against this list before publication.
 - `ms` 2.1.3
 - `paseto-ts` 2.0.7
 - `supports-color` 8.1.1
-- `zod` 4.4.3
+- `zod` 4.5.4
 
-Each executable embeds the Bun 1.3.14 runtime. Bun itself uses the MIT license
+Each executable embeds the Bun 1.4.2 runtime. Bun itself uses the MIT license
 and includes components under other licenses, including JavaScriptCore and
 WebKit components under LGPL-2. Bun's exact
-[license and source terms](https://github.com/oven-sh/bun/blob/bun-v1.3.14/LICENSE.md)
+[license and source terms](https://github.com/oven-sh/bun/blob/bun-v1.4.2/LICENSE.md)
 apply to the embedded runtime.
 
 ## @commander-js/extra-typings 15.0.0
@@ -113,7 +113,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-## Zod 4.4.3
+## Zod 4.5.4
 
 MIT License
 
