@@ -2,7 +2,7 @@
 set -eu
 
 repository=kennethlynne/cogenity
-release_version=0.31.10
+release_version=0.31.11
 install_dir=${COGENITY_INSTALL_DIR:-"$HOME/.local/bin"}
 operating_system=$(uname -s)
 architecture=$(uname -m)
