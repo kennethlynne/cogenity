@@ -41,11 +41,11 @@ addresses.
 
 ```sh
 brew install kennethlynne/tap/cogenity
-cogenity login claude dev@customer-a.ai
+cogenity enroll claude dev@customer-a.ai
 cogenity --claude --account dev@customer-a.ai
 ```
 
-Repeat `cogenity login` for each account you want to keep separate.
+Repeat `cogenity enroll` for each account you want to keep separate.
 
 With mise, replace the Homebrew install command with:
 
@@ -88,46 +88,56 @@ AgentBox choices appear only outside an AgentBox, in a repository with
 
 ## Cogenity Pro
 
-Three accounts are free in total across Claude Code and Codex. Cogenity Pro is
-required when you add a fourth account.
+Three provider accounts are free in total across Claude Code and Codex, and
+they need no Cogenity account. Cogenity Pro is required when you add a fourth.
 
 ```sh
-cogenity upgrade             # Check Pro access or buy in the browser
-cogenity activate <license>  # Reconnect an existing license
-cogenity billing             # Open subscription management
+cogenity login      # Sign in to your Cogenity account in the browser
+cogenity upgrade    # Subscribe, or confirm you already have Pro
+cogenity logout     # Sign this machine out
 ```
 
-Cogenity checks and reuses active Pro access when its config remains on disk.
-If you reinstall without that config or move to another machine, run
-`cogenity activate <license>` with the license key from your Creem receipt or
-customer portal, or run `cogenity activate` alone and enter it at the hidden
-prompt. Neither path saves the license key, but the argument form leaves it in
-your shell history. After config loss, use `cogenity activate` to recover an old
-purchase because `cogenity upgrade` cannot prove ownership and starts checkout.
+`cogenity login` shows a code and a URL, opens the page, and waits for you to
+confirm it there. `cogenity upgrade` reports an existing subscription and
+exits; otherwise it opens your dashboard at
+[app.cogenity.sh](https://app.cogenity.sh), where you subscribe, and waits for
+your payment. Ctrl-C
+stops either wait and changes nothing, so you can run the command again.
+
+Your subscription belongs to your account, not to one machine, so you can sign
+in on as many machines as you like. The dashboard at
+[app.cogenity.sh](https://app.cogenity.sh) lists every machine you signed in
+from and signs one out for you; `cogenity logout` signs out the machine you run
+it on. A machine that loses access locks its extra accounts again at the next
+check.
 
 ### What Cogenity stores
 
-- `~/.config/cogenity/pro.json` holds a random installation ID and secret
-  credential, pending pairing or activation capabilities, and the current
-  signed entitlement cache. The file is readable only by your user.
-- The Cogenity Worker stores pairing and installation records; Creem customer,
-  checkout, product, subscription, license, and transaction IDs; event IDs;
-  payment amount and currency; and subscription lifecycle state in Cloudflare
-  SQLite. It stores keyed digests of installation credentials, polling
-  capabilities, and license keys, not the raw secrets.
-- Creem stores the customer, payment, subscription, and license records. The
-  Worker reads signed Creem webhooks, then uses its own ledger during normal
-  Cogenity launches.
+- `~/.config/cogenity/account.json` holds your Cogenity user ID, the address
+  you signed in with, and the current signed entitlement. The file is readable
+  only by your user and holds no credential. An older `pro.json` from a release
+  before accounts existed is ignored and can be deleted.
+- Your refresh credential lives in the macOS Keychain, in an item named
+  `Cogenity-account-…`; on other systems it is a `.credentials.json` file
+  readable only by your user. `cogenity logout` removes it.
+- The Cogenity Worker stores your email, plan, paid-through date, signed-in
+  machines, and Creem customer, checkout, subscription and transaction IDs in
+  Cloudflare SQLite. It stores keyed digests of your credentials, not the raw
+  secrets.
+- Creem stores the customer, payment and subscription records. The Worker reads
+  signed Creem webhooks, then uses its own records during normal Cogenity
+  launches.
 - `~/.config/cogenity/telemetry.json` holds a separate random machine ID and
-  your telemetry choice. It is not the Pro installation ID. Run
+  your telemetry choice. It is not your Cogenity account ID. Run
   `cogenity telemetry off` to turn reporting off.
 - `~/.config/cogenity/update.json` holds release check times, release versions,
   notice times, and a safe error category. It contains no account or telemetry
   ID. The hidden update refresh disables telemetry.
 
-Cogenity never sends Claude Code or Codex credentials to the Worker. The Worker
-contacts Creem only to create a checkout, activate an entered license, or open
-subscription management. It does not contact Creem for each launch.
+Cogenity never sends Claude Code or Codex credentials to the Worker, and no
+sign-in token from the identity provider ever reaches the CLI. The Worker
+contacts Creem only to open a checkout or subscription management. It does not
+contact Creem for each launch.
 
 This repository contains the installer and release executables, not Cogenity's
 TypeScript source or development history. Compiled executables can still be
