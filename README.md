@@ -94,6 +94,8 @@ they need no Cogenity account. Cogenity Pro is required when you add a fourth.
 ```sh
 cogenity login      # Sign in to your Cogenity account in the browser
 cogenity upgrade    # Subscribe, or confirm you already have Pro
+cogenity dashboard  # Open your dashboard in the browser
+cogenity billing    # Manage your subscription in the browser
 cogenity logout     # Sign this machine out
 ```
 
@@ -103,6 +105,10 @@ exits; otherwise it opens your dashboard at
 [app.cogenity.sh](https://app.cogenity.sh), where you subscribe, and waits for
 your payment. Ctrl-C
 stops either wait and changes nothing, so you can run the command again.
+
+`cogenity dashboard` opens your dashboard. After you subscribe,
+`cogenity billing` opens the Creem page where you manage your subscription;
+this machine must be signed in.
 
 Your subscription belongs to your account, not to one machine, so you can sign
 in on as many machines as you like. The dashboard at
