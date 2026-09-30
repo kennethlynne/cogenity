@@ -40,24 +40,24 @@ enroll your accounts. Replace the example emails with your real login
 addresses.
 
 ```sh
-brew install kennethlynne/tap/cogenity
+curl -fsSL https://cogenity.sh/install.sh | sh
 cogenity enroll claude dev@customer-a.ai
 cogenity --claude --account dev@customer-a.ai
 ```
 
-Repeat `cogenity enroll` for each account you want to keep separate.
+Repeat `cogenity enroll` for each account you want to keep separate. You can
+also run `cogenity` and select **Add account**.
 
-With mise, replace the Homebrew install command with:
+To install with Homebrew instead:
+
+```sh
+brew install kennethlynne/tap/cogenity
+```
+
+Or with mise:
 
 ```sh
 mise use -g github:kennethlynne/cogenity@latest
-```
-
-You can also run `cogenity` and select **Add account**. On Linux, or without
-Homebrew, use the installer:
-
-```sh
-curl --proto '=https' --tlsv1.2 -fsSL https://raw.githubusercontent.com/kennethlynne/cogenity/main/install.sh | sh
 ```
 
 ### Platform support
