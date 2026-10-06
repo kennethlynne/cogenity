@@ -71,20 +71,23 @@ x86-64 processors require SSE4.2 (Intel Nehalem, AMD Bulldozer, or newer).
 
 The installer checks the release checksum and writes
 `~/.local/bin/cogenity`. Set `COGENITY_INSTALL_DIR` to change the destination.
-Local account and launch commands do not need a separate Bun installation.
+When that directory is not on `PATH`, the installer adds it to your zsh or bash
+startup file; set `COGENITY_NO_MODIFY_PATH=1` to leave the file unchanged.
+To print only errors, pipe the script to `sh -s -- -q` instead of `sh`; use `-h` to list the options.
+Cogenity needs no separate Bun installation.
 
 Cogenity checks for a new release once a day without delaying a launch. It
-only shows a notice. Run `cogenity update` when you are ready. Homebrew and
-mise remain the install owner. Standalone installs use the verified release
+only shows a notice. Run `cogenity update` when you are ready. A Homebrew
+update moves Cogenity to `~/.local/bin` and removes the formula only after
+checking the replacement and the shell PATH. A healthy mise copy can
+still win PATH and stays unchanged. Mise continues to own its installs.
+Standalone installs use the verified release
 installer. A failed check waits one day before it retries. Run
 `cogenity doctor` to see the saved failure. Set `COGENITY_UPDATE_CHECK=0` to
 disable update checks.
 
 Cogenity keeps profiles under `~/.config/cogenity`. On macOS, Claude Code uses
 the system Keychain. On Linux, credentials stay inside each profile directory.
-
-AgentBox choices appear only outside an AgentBox, in a repository with
-`agentbox.yaml` and Bun on `PATH`. AgentBox flows also require `git`.
 
 ## Cogenity Pro
 
