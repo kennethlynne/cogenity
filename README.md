@@ -51,7 +51,7 @@ also run `cogenity` and select **Add account**.
 To install with Homebrew instead:
 
 ```sh
-brew install kennethlynne/tap/cogenity
+brew install --cask cogenityhq/tap/cogenity
 ```
 
 Or with mise:
@@ -77,12 +77,13 @@ To print only errors, pipe the script to `sh -s -- -q` instead of `sh`; use `-h`
 Cogenity needs no separate Bun installation.
 
 Cogenity checks for a new release once a day without delaying a launch. It
-only shows a notice. Run `cogenity update` when you are ready. A Homebrew
-update moves Cogenity to `~/.local/bin` and removes the formula only after
-checking the replacement and the shell PATH. A healthy mise copy can
-still win PATH and stays unchanged. Mise continues to own its installs.
-Standalone installs use the verified release
-installer. A failed check waits one day before it retries. Run
+only shows a notice. Run `cogenity update` when you are ready. Homebrew Cask
+installs update through Homebrew after Cogenity verifies the install receipt.
+Older Homebrew Formula installs move to `~/.local/bin` and remove the Formula
+only after checking the replacement and the shell PATH. A healthy mise copy
+can still win PATH and stays unchanged. Mise continues to own its installs.
+Standalone installs use the verified release installer. A failed check waits
+one day before it retries. Run
 `cogenity doctor` to see the saved failure. Set `COGENITY_UPDATE_CHECK=0` to
 disable update checks.
 
