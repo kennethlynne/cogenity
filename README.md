@@ -6,7 +6,8 @@ then starts the provider with the account you choose.
 
 ## Usage
 
-Run `cogenity` without flags to open the provider and account picker.
+Run `cogenity` without flags to sign in and open the provider and account picker.
+If you are already signed in, Cogenity uses your saved session.
 
 ```sh
 cogenity             # Pick or add an account
@@ -35,9 +36,10 @@ Provider permission checks stay on by default. To turn them off, run
 
 ## Getting started
 
-Install Claude Code 2.1.144 or newer, Codex, or both. Then install Cogenity and
-enroll your accounts. Replace the example emails with your real login
-addresses.
+Install Claude Code 2.1.144 or newer, Codex, or both. A fresh terminal
+installation of Cogenity starts sign-in and subscription setup. Replace the
+example emails with your real login addresses. Use code **SINGULARITY** at
+checkout for one free month, then US$5 per month.
 
 ```sh
 curl -fsSL https://cogenity.sh/install.sh | sh
@@ -71,10 +73,13 @@ x86-64 processors require SSE4.2 (Intel Nehalem, AMD Bulldozer, or newer).
 
 The installer checks the release checksum and writes
 `~/.local/bin/cogenity`. Set `COGENITY_INSTALL_DIR` to change the destination.
-When that directory is not on `PATH`, the installer adds it to your zsh or bash
-startup file; set `COGENITY_NO_MODIFY_PATH=1` to leave the file unchanged.
+On a fresh installation, the installer adds that directory to your zsh or bash
+startup file if it is not on `PATH`. Set `COGENITY_NO_MODIFY_PATH=1` to leave the file unchanged.
 To print only errors, pipe the script to `sh -s -- -q` instead of `sh`; use `-h` to list the options.
-Cogenity needs no separate Bun installation.
+Cogenity needs no separate Bun installation. Quiet installs, updates, and
+installs without a terminal skip onboarding. Run `cogenity` in a terminal to
+complete it. Ctrl-C stops onboarding and keeps the installed binary;
+`cogenity upgrade` resumes it.
 
 Cogenity checks for a new release once a day without delaying a launch. It
 only shows a notice. Run `cogenity update` when you are ready. Homebrew Cask
@@ -92,8 +97,10 @@ the system Keychain. On Linux, credentials stay inside each profile directory.
 
 ## Cogenity Pro
 
-Three provider accounts are free in total across Claude Code and Codex, and
-they need no Cogenity account. Cogenity Pro is required when you add a fourth.
+An active Cogenity Pro subscription is required to enroll provider accounts
+and run agents. Use code **SINGULARITY** at checkout for one free month.
+The subscription then renews monthly at the regular price.
+That month provides the same access as any active subscription.
 
 ```sh
 cogenity login      # Sign in to your Cogenity account in the browser
@@ -103,12 +110,18 @@ cogenity billing    # Manage your subscription in the browser
 cogenity logout     # Sign this machine out
 ```
 
+An interactive `cogenity` launch starts sign-in when needed, then subscription
+setup before it selects or starts an agent. Homebrew and mise installs use
+this startup flow. Launches without a terminal require an existing session and
+active subscription; they do not prompt.
+
 `cogenity login` shows a code and a URL, opens the page, and waits for you to
-confirm it there. `cogenity upgrade` reports an existing subscription and
-exits; otherwise it opens your dashboard at
+confirm it there. `cogenity upgrade` signs in when needed. It reports an existing
+subscription and exits; otherwise it opens your dashboard at
 [app.cogenity.sh](https://app.cogenity.sh), where you subscribe, and waits for
 your payment. Ctrl-C
-stops either wait and changes nothing, so you can run the command again.
+stops either wait. A completed sign-in stays saved, so you can resume with
+`cogenity upgrade`.
 
 `cogenity dashboard` opens your dashboard. After you subscribe,
 `cogenity billing` opens the Creem page where you manage your subscription;
@@ -118,8 +131,9 @@ Your subscription belongs to your account, not to one machine, so you can sign
 in on as many machines as you like. The dashboard at
 [app.cogenity.sh](https://app.cogenity.sh) lists every machine you signed in
 from and signs one out for you; `cogenity logout` signs out the machine you run
-it on. A machine that loses access locks its extra accounts again at the next
-check.
+it on. A machine that loses access locks every provider account at the next
+check. Help, status, account removal, sign-in, and subscription management stay
+available.
 
 ### What Cogenity stores
 
